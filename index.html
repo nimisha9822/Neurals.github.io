@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Indian Map</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div id="map"></div>
+  <br>
+  <input type="text" id="search-input" placeholder="Search for a place">
+  <button onclick="search()">Search</button>
+
+  <script>
+    var places = [
+      { name: "Delhi", x: 140, y: 250 },
+      { name: "Mumbai", x: 100, y: 400 },
+      { name: "Orissa", x: 210, y: 360 },
+      { name: "Rajasthan", x: 60, y: 280 },
+      { name: "Assam", x: 315, y: 270 }
+    ];
+    
+    var map = document.getElementById("map");
+    var searchInput = document.getElementById("search-input");
+
+    function search() {
+      var searchText = searchInput.value.toLowerCase();
+      var selectedPlace = places.find(place => place.name.toLowerCase() === searchText);
+      
+      if (selectedPlace) {
+        showMarker(selectedPlace);
+      } else {
+        alert("Place not found!");
+      }
+    }
+
+    function showMarker(place) {
+      var marker = document.createElement("div");
+      marker.className = "place-marker";
+      marker.style.top = place.y + "px";
+      marker.style.left = place.x + "px";
+      map.appendChild(marker);
+      
+      setTimeout(function() {
+        marker.textContent = place.name;
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
